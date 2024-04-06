@@ -1,0 +1,23 @@
+---
+import "../styles/global.css"
+import BlogPost from "../components/BlogPost.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+const blogPosts = await Astro.glob("../pages/posts/*.md")
+const title = "Blog"
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <title>{title}</title>
+  </head>
+  <body>
+    <BaseLayout title={title}>
+      <ul>
+        {blogPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
+      </ul>
+    </BaseLayout>
+  </body>
+</html>
